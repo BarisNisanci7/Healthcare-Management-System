@@ -84,7 +84,9 @@ Frontend files are located in the `frontend/` directory and provide basic UI imp
 - `POST /api/v1/cache/save`: Save data to cache.
 - `GET /api/v1/cache/get`: Retrieve data from cache.
 
-- # Challenges and Solutions
+---
+
+# Challenges and Solutions
 
 ## 1. Circular Dependency
 **Challenge:**  
