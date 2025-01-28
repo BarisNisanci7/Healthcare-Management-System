@@ -102,6 +102,3 @@ Frontend files are located in the `frontend/` directory and provide basic UI imp
    ```bash
    http://localhost:8080
    ```
-
-## Contributors
-- **Your Name**: Barış
