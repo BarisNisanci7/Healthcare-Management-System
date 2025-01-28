@@ -23,7 +23,6 @@ The Healthcare Management System is a microservice-based application designed to
   - APIs are routed through an API Gateway.
 - **Queue Solution**: RabbitMQ is used for asynchronous messaging.
 - **Caching**: Redis caching is implemented for medicine names.
-- **Cloud Deployment**: The application is prepared for deployment on AWS or Azure.
 - **Docker Support**: Each microservice has a Dockerfile, and a `docker-compose.yml` file is provided for multi-service orchestration.
 
 ## Assumptions
