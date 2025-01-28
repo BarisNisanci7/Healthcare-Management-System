@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pharmacy Service</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      width: 400px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #218838;
+    }
+
+    .medicine-list {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      background-color: #fafafa;
+    }
+
+    .medicine-list h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .total {
+      font-size: 16px;
+      margin-top: 10px;
+      text-align: right;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Submit Prescription</h1>
+  <form id="pharmacyForm">
+    <div class="form-group">
+      <label for="prescriptionId">Prescription ID</label>
+      <input type="text" id="prescriptionId" name="prescriptionId" required>
+    </div>
+    <div class="form-group">
+      <label for="medicine">Medicine</label>
+      <input type="text" id="medicine" name="medicine" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" required>
+    </div>
+    <button type="button" class="button" id="addMedicineButton">Add Medicine</button>
+    <div class="medicine-list" id="medicineListContainer">
+      <h3>Added Medicines:</h3>
+      <ul id="medicineList"></ul>
+      <div class="total" id="totalPrice">Total: 0 TL</div>
+    </div>
+    <button type="submit" class="button">Submit</button>
+  </form>
+</div>
+
+<script>
+  const medicineList = [];
+  let totalPrice = 0;
+
+  document.getElementById('addMedicineButton').addEventListener('click', function () {
+    const medicine = document.getElementById('medicine').value.trim();
+    const price = parseFloat(document.getElementById('price').value);
+
+    if (medicine && !isNaN(price)) {
+      medicineList.push({ name: medicine, price });
+      totalPrice += price;
+
+      const listItem = document.createElement('li');
+      listItem.textContent = `${medicine} - ${price} TL`;
+      document.getElementById('medicineList').appendChild(listItem);
+
+      document.getElementById('totalPrice').textContent = `Total: ${totalPrice} TL`;
+      document.getElementById('medicine').value = '';
+      document.getElementById('price').value = '';
+    }
+  });
+
+  document.getElementById('pharmacyForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const prescriptionId = document.getElementById('prescriptionId').value;
+
+    const response = await fetch('http://localhost:8084/api/pharmacy/submitPrescription', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prescriptionId,
+        medicines: medicineList,
+      }),
+    });
+
+    if (response.ok) {
+      alert('Prescription submitted successfully!');
+    } else {
+      alert('Failed to submit prescription.');
+    }
+  });
+</script>
+</body>
+</html>
