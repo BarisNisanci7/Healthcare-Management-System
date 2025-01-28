@@ -84,6 +84,60 @@ Frontend files are located in the `frontend/` directory and provide basic UI imp
 - `POST /api/v1/cache/save`: Save data to cache.
 - `GET /api/v1/cache/get`: Retrieve data from cache.
 
+- # Challenges and Solutions
+
+## 1. Circular Dependency
+**Challenge:**  
+A circular dependency occurred between the `JwtFilter` and `SecurityConfig` classes, preventing Spring Boot from starting the application.
+
+**Solution:**  
+- Removed the `JwtFilter` class from the Spring container and configured it manually within `SecurityConfig`.
+- Restructured Spring Security configurations to eliminate the circular dependency.
+
+---
+
+## 2. Database Connection
+**Challenge:**  
+Spring Boot threw an error in the `DataSource` configuration due to a missing database connection setup.
+
+**Solution:**  
+- Added the necessary PostgreSQL connection settings to the `application.properties` file.
+- Included the PostgreSQL driver in the `pom.xml` file.
+- Conducted quick tests using an embedded database (H2).
+
+---
+
+## 3. Authentication and Security
+**Challenge:**  
+While implementing a JWT-based authentication mechanism, it was necessary to properly handle token management and distinctions between user roles.
+
+**Solution:**  
+- Included user role (`ROLE_DOCTOR`) information in JWT tokens.
+- Customized security filters in `JwtFilter` to ensure access to only the required endpoints.
+- Managed user authentication processes using `UserDetailsService`.
+
+---
+
+## 4. DTO Usage
+**Challenge:**  
+Preventing the transfer of unnecessary or sensitive data to the client through APIs was required.
+
+**Solution:**  
+- Used DTOs (Data Transfer Objects) to ensure only necessary data was sent to the client.
+- Simplified the conversion of models to DTOs using `ModelMapper`.
+
+---
+
+## 5. Spring Security and JWT Integration
+**Challenge:**  
+Incompatibilities and configuration issues arose during the integration of `SecurityConfig` and `JwtFilter`.
+
+**Solution:**  
+- Redesigned the Spring Security configuration and manually added `JwtFilter` to the security chain.
+- Defined customized security rules instead of using default settings.
+
+
+
 ## Installation and Setup
 1. Clone the repository:
    ```bash
