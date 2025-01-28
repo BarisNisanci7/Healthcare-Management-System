@@ -43,12 +43,10 @@ The Healthcare Management System is a microservice-based application designed to
 
 ## Frontend Structure
 Frontend files are located in the `frontend/` directory and provide basic UI implementations for the following services:
-- `authentication.html`: Login and user authentication.
-- `doctor.html`: Prescription creation by doctors.
-- `pharmacy.html`: Prescription processing by pharmacies.
-- `medicine.html`: Medicine management and search with autocomplete.
-- `notification.html`: Notification management interface.
-- `styles.css`: Shared styles for all frontend components.
+- `authenticationservice.html`: Login and user authentication.
+- `doctorservice.html`: Prescription creation by doctors.
+- `prescription.html`: Prescription processing by pharmacies.
+- `medicineservice.html`: Medicine management and search with autocomplete.
 
 ## Data Models (ER Diagram)
 ![ER Diagram](docs/ER_Diagram.png)
