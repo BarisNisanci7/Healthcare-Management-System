@@ -49,7 +49,7 @@ Frontend files are located in the `frontend/` directory and provide basic UI imp
 - `medicineservice.html`: Medicine management and search with autocomplete.
 
 ## Data Models (ER Diagram)
-![ER Diagram](docs/ER_Diagram.png)
+![ER Diagram](er_diagram/ER_Diagram.png)
 
 ## Deployment
 - **API and UI Hosting**: Cloud-based deployment using AWS EC2.
